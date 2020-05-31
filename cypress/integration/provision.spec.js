@@ -24,6 +24,7 @@ context('Provision panel', () => {
     cy.wait(500);
 
     cy.get('[icon="plus"]').click();
+    cy.wait(500);
 
     // check all fields
     cy.get('mat-label').contains('Name').should('exist');
@@ -31,7 +32,6 @@ context('Provision panel', () => {
 
     // set data
     cy.get('#name').type('aaaa-testing-host-group');
-
     cy.get('button').contains('Create').click();
     cy.get('.mat-select-placeholder').click();
     cy.get('span').contains('t1').click();
@@ -39,23 +39,25 @@ context('Provision panel', () => {
 
     cy.get('h4').contains('Selected IPs: 1').should('exist');
     cy.get('button').contains('Create').click();
+    cy.wait(250);
 
     // Check that the user is updated
-    cy.wait(250);
     cy.get('td').contains('aaaa-testing-host-group').should('exist');
+    cy.wait(250);
   });
 
   it('edit host group', () => {
     cy.get('.cdk-column-name > .mat-sort-header-container > .mat-sort-header-button').click();
-    cy.wait(150);
+    cy.wait(250);
     cy.get(':nth-child(1) > .cdk-column-actions > div.ng-star-inserted > .mat-primary').click();
     cy.wait(250);
 
     cy.get('#name').clear();
     cy.get('#name').type('aaaa-aa-testing-host-group');
-    cy.wait(150);
+    cy.wait(250);
 
     cy.get('button').contains('Save').click();
+    cy.wait(250);
   });
 
   it('create playbook', () => {
