@@ -1,10 +1,13 @@
 {
   "chromeWebSecurity": false,
   "video": false,
+  "viewportWidth": 1280,
+  "viewportHeight": 720,
   "testFiles": [
     "login.spec.js",
     "logout.spec.js",
     "admin.spec.js",
+    "deploy-mock.spec.js",
     "machines.spec.js",
     "provision.spec.js",
     "window.spec.js",
