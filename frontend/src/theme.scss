@@ -1,0 +1,75 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$ipm-primary: (
+  50 : #e6e9f3,
+  100 : #c0c9e0,
+  200 : #96a5cb,
+  300 : #6c81b6,
+  400 : #4d66a7,
+  500 : #2d4b97,
+  600 : #28448f,
+  700 : #223b84,
+  800 : #1c337a,
+  900 : #112369,
+  A100 : #9eb0ff,
+  A200 : #6b86ff,
+  A400 : #385cff,
+  A700 : #1f48ff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$ipm-primary-accent: (
+  50 : #fff4e6,
+  100 : #ffe4bf,
+  200 : #ffd395,
+  300 : #ffc16b,
+  400 : #ffb34b,
+  500 : #ffa62b,
+  600 : #ff9e26,
+  700 : #ff9520,
+  800 : #ff8b1a,
+  900 : #ff7b10,
+  A100 : #ffffff,
+  A200 : #fffbf8,
+  A400 : #ffddc5,
+  A700 : #ffceac,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$ipm-app-primary: mat-palette($ipm-primary);
+$ipm-app-accent:  mat-palette($ipm-primary-accent);
+$ipm-app-theme: mat-light-theme($ipm-app-primary, $ipm-app-accent);
+
+@include angular-material-theme($ipm-app-theme);

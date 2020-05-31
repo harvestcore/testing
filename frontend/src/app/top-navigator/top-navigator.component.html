@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <div fxLayout="row" fxLayoutGap="0.25em">
+    <fa-icon class="logoIcon" icon="laptop"></fa-icon>
+    <button routerLink="/" mat-button class="logo">IPManager</button>
+
+    <div fxLayout="row" fxFlexAlign="space-between center">
+      <button routerLink="/deploy" mat-button [disabled]="dockerDisabled">Deploy</button>
+      <button routerLink="/provision" mat-button>Provision</button>
+      <button routerLink="/machines" mat-button>Machines</button>
+    </div>
+  </div>
+
+  <div fxFlex="1 1 auto"></div>
+
+  <div *ngIf="currentUser" fxLayout="row" fxLayoutGap="0.5em">
+    <button
+      mat-button
+      *ngIf="currentUser.type === 'admin'"
+      fxLayout="row"
+      fxFlexAlign="space-between center"
+      routerLink="/admin"
+    >
+      <fa-icon icon="user-shield"></fa-icon>
+      <span>Admin</span>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="user" fxLayout="row" fxFlexAlign="space-between center">
+      <fa-icon icon="user"></fa-icon>
+      <span>{{currentUser.username + ' (' + currentUser.first_name + ' ' + currentUser.last_name + ')'}}</span>
+    </button>
+    <mat-menu #user="matMenu">
+      <button (click)="handleLogout()" mat-menu-item>Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

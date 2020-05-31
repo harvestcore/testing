@@ -1,0 +1,119 @@
+<h3 *ngIf="data.title" mat-dialog-title>{{ data.title }}</h3>
+
+<mat-dialog-content>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Common operations</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-progress-bar class="expansion-content" *ngIf="runningOperation" mode="indeterminate" color="accent"></mat-progress-bar>
+      <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em" class="expansion-content">
+        <button
+          [disabled]="item.status === 'exited' || item.status === 'paused' || runningOperation"
+          fxLayout="column"
+          fxLayoutAlign="center"
+          mat-raised-button
+          color="primary"
+          (click)="commonOperation('pause')">
+          <span>Pause</span>
+        </button>
+        <button
+          [disabled]="item.status !== 'paused' || runningOperation"
+          fxLayout="column"
+          fxLayoutAlign="center"
+          mat-raised-button
+          color="primary"
+          (click)="commonOperation('unpause')">
+          <span>Unpause</span>
+        </button>
+        <button
+          [disabled]="item.status === 'exited' || runningOperation"
+          fxLayout="column"
+          fxLayoutAlign="center"
+          mat-raised-button
+          color="warn"
+          (click)="commonOperation('kill')">
+          <span>Kill</span>
+        </button>
+        <button
+          [disabled]="item.status === 'exited' || runningOperation"
+          fxLayout="column"
+          fxLayoutAlign="center"
+          mat-raised-button
+          color="accent"
+          (click)="commonOperation('stop')">
+          <span>Stop</span>
+        </button>
+        <button
+          [disabled]="runningOperation"
+          fxLayout="column"
+          fxLayoutAlign="center"
+          mat-raised-button
+          color="primary"
+          (click)="commonOperation('restart')">
+          <span>Restart</span>
+        </button>
+        <button
+          [disabled]="runningOperation"
+          fxLayout="column"
+          fxLayoutAlign="center"
+          mat-raised-button
+          color="primary"
+          (click)="commonOperation('reload')">
+          <span>Reload</span>
+        </button>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Change container name</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div fxLayout="row" fxLayoutGap="1em" class="expansion-content">
+        <form [formGroup]="containerForm" fxFlex="90">
+          <mat-form-field fxFill>
+            <mat-label for="name">Name</mat-label>
+            <input matInput id="name" type="text" formControlName="name">
+          </mat-form-field>
+        </form>
+        <div fxFlex="10">
+          <button
+            [disabled]="containerForm.invalid"
+            fxLayout="column"
+            fxLayoutAlign="center"
+            mat-icon-button
+            matTooltip="Set new name"
+            color="primary"
+            (click)="rename()">
+            <fa-icon icon="check"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Logs</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div fxLayout="column" fxLayoutGap="1em" class="expansion-content">
+        <mat-progress-bar *ngIf="fetchingLogs" mode="indeterminate" color="accent"></mat-progress-bar>
+        <textarea
+          matInput
+          readonly
+          [value]="logsText"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="25">
+        ></textarea>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-dialog-content>
+
+<mat-dialog-actions fxFlexAlign="space-between center">
+  <div fxFlex="1 1 auto"></div>
+  <button mat-raised-button mat-dialog-close color="accent">{{ data.buttonLabel || 'Close' }}</button>
+</mat-dialog-actions>

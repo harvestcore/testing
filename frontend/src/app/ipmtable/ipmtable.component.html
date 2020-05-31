@@ -1,0 +1,50 @@
+<h3 *ngIf="title">{{ title }}</h3>
+
+<div fxLayout="row" fxLayoutGap="1em">
+  <mat-form-field fxFlex="80">
+    <mat-label>Filter</mat-label>
+    <input matInput [(ngModel)]="filter" (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()" matTooltip="Clear filter">
+      <fa-icon icon="times"></fa-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field fxFlex="20">
+    <mat-label>Columns</mat-label>
+    <mat-select [formControl]="selectedDisplayedRows" multiple (selectionChange)="handleColumnSelection($event)" matTooltip="Change the displayed columns">
+      <mat-option *ngFor="let col of displayedColumnsCopy" [value]="col">{{ col | uppercase }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort>
+  <ng-container *ngFor="let tableKey of displayedColumns" matColumnDef="{{ tableKey }}">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ tableKey | uppercase }}</th>
+    <td mat-cell *matCellDef="let row">
+      <div *ngIf="tableKey !== 'actions'">{{ row[tableKey] || '-' }}</div>
+      <div *ngIf="tableKey === 'actions'">
+        <button *ngIf="actionEnabled('P')" mat-icon-button matTooltip="Execute" color="accent" (click)="emitPlayCallback(row)">
+          <fa-icon icon="play"></fa-icon>
+        </button>
+        <button *ngIf="actionEnabled('D')" mat-icon-button matTooltip="Details" color="primary" (click)="emitDetailCallback(row)">
+          <fa-icon icon="eye"></fa-icon>
+        </button>
+        <button *ngIf="actionEnabled('C')" mat-icon-button matTooltip="{{customActionData.tooltip}}" color="primary" (click)="emitCustomActionCallback(row)">
+          <fa-icon icon="{{customActionData.icon}}"></fa-icon>
+        </button>
+        <button *ngIf="actionEnabled('E')" mat-icon-button matTooltip="Edit" color="primary" (click)="emitEditCallback(row)">
+          <fa-icon icon="edit"></fa-icon>
+        </button>
+        <button *ngIf="actionEnabled('R')" mat-icon-button matTooltip="Remove" color="warn" (click)="emitRemoveCallback(row)">
+          <fa-icon icon="trash"></fa-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 25, 50, 100, 250]"></mat-paginator>
+

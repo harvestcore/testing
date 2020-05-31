@@ -1,0 +1,14 @@
+@font-face {
+  font-family: Mukta;
+  src: url('src/assets/fonts/mukta/Mukta-SemiBold.ttf') format("opentype");
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+.mat-card {
+  border: 1px solid #00000015;
+  background-color: #9eb0ff10;
+}

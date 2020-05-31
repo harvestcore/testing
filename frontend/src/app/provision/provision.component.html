@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-title>
+    <h3>Provision</h3>
+  </mat-card-title>
+  <mat-card-content>
+    <mat-tab-group [selectedIndex]="selectedTab" (selectedTabChange)="changeTab($event)">
+      <mat-tab label="Playbooks">
+        <ng-template matTabContent>
+          <div class="tab">
+            <app-playbooks></app-playbooks>
+          </div>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Editor">
+        <ng-template matTabContent>
+          <div class="tab">
+            <app-editor></app-editor>
+          </div>
+        </ng-template></mat-tab>
+      <mat-tab label="Host groups">
+        <ng-template matTabContent>
+          <div class="tab">
+            <app-hosts></app-hosts>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

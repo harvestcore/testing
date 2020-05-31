@@ -1,0 +1,11 @@
+mat-dialog-actions {
+  margin-bottom: 0.15em;
+}
+
+mat-dialog-content {
+  margin-bottom: 1em;
+}
+
+button, h2 {
+  font-weight: bold;
+}

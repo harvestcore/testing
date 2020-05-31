@@ -1,0 +1,46 @@
+<mat-card>
+  <mat-card-content>
+    <div class="containerButtons" fxLayoutGap="1em">
+      <div fxFlex="1 1 auto"></div>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Run containers"
+        (click)="goToImages()">
+        <fa-icon icon="play"></fa-icon>
+      </button>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Refresh data"
+        (click)="fetchData()">
+        <fa-icon icon="sync"></fa-icon>
+      </button>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="warn"
+        matTooltip="Prune containers"
+        (click)="pruneContainers()"
+      >
+        <fa-icon icon="trash"></fa-icon>
+      </button>
+    </div>
+
+    <app-ipmtable
+      *ngIf="data"
+      [displayedColumns]="displayedColumns"
+      [deselectedColumns]="['id']"
+      [actions]="['C']"
+      [data]="data"
+      (customActionCallback)="manageContainer($event)"
+      [customActionData]="manageContainerCustomActionData"
+    >
+    </app-ipmtable>
+  </mat-card-content>
+</mat-card>

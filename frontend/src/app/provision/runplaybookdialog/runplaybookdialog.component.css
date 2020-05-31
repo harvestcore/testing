@@ -1,0 +1,21 @@
+mat-dialog-actions {
+  margin-top: 0.15em;
+  margin-bottom: 0.1em;
+}
+
+mat-dialog-content {
+  font-size: 13px;
+}
+
+button {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+textarea, mat-progress-bar {
+  margin-top: 1em
+}

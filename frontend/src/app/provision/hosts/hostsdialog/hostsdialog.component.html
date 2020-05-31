@@ -1,0 +1,37 @@
+<h3 *ngIf="data.title" mat-dialog-title>{{ data.title }}</h3>
+
+<mat-dialog-content>
+  <form [formGroup]="hostForm" fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field fxFlex="60">
+        <mat-label for="name">Name</mat-label>
+        <input matInput id="name" type="text" formControlName="name" required>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="40">
+        <mat-label for="ips">IP</mat-label>
+        <mat-select id="ips" formControlName="ips" (selectionChange)="selectIp($event)" matTooltip="Select IPv4 directions">
+          <mat-option *ngFor="let item of availableIps" [value]="item">{{ item.ipv4 + ' - ' + item.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <mat-divider></mat-divider>
+
+  <h4>Selected IPs: {{selectedIps.length}}</h4>
+  <mat-list>
+    <mat-list-item *ngFor="let item of selectedIps">
+      <span>{{ item.ipv4 + ' - ' + item.name }}</span>
+      <div fxFlex="1 1 auto"></div>
+      <button mat-icon-button color="warn" (click)="removeIp(item)" matTooltip="Remove this IPv4"><fa-icon icon="trash"></fa-icon></button>
+    </mat-list-item>
+  </mat-list>
+
+</mat-dialog-content>
+
+<mat-dialog-actions fxFlexAlign="space-between center">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <div fxFlex="1 1 auto"></div>
+  <button mat-raised-button color="accent" [disabled]="hostForm.invalid || !selectedIps.length" [mat-dialog-close]="hostForm.value">{{ data.buttonLabel || 'Submit' }}</button>
+</mat-dialog-actions>

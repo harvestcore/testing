@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-content>
+    <div class="imageButtons" fxLayoutGap="1em">
+      <div fxFlex="1 1 auto"></div>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Search and pull images"
+        (click)="searchImages()">
+        <fa-icon icon="search"></fa-icon>
+      </button>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Refresh data"
+        (click)="fetchData()">
+        <fa-icon icon="sync"></fa-icon>
+      </button>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="warn"
+        matTooltip="Prune images"
+        (click)="pruneImages()">
+        <fa-icon icon="trash"></fa-icon>
+      </button>
+    </div>
+
+    <app-ipmtable
+      *ngIf="data"
+      [displayedColumns]="displayedColumns"
+      [deselectedColumns]="['id']"
+      [actions]="['P','C', 'R']"
+      [data]="data"
+      (playCallback)="runImage($event)"
+      (customActionCallback)="manageImage($event)"
+      (removeCallback)="removeImage($event)"
+      [customActionData]="manageContainerCustomActionData"
+    >
+    </app-ipmtable>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,26 @@
+mat-divider {
+  margin: 1em 0;
+}
+
+mat-dialog-actions {
+  margin-top: 0.15em;
+  margin-bottom: 0.1em;
+}
+
+mat-dialog-content, span {
+  font-size: 13px;
+}
+
+button {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 0;
+}
+
+mat-list, h4 {
+  padding: 0 !important;
+}
+
+h3 {
+  font-weight: bold;
+}

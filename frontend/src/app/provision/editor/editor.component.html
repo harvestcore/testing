@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-content>
+    <div fxLayoutGap="1em">
+      <div fxFlex="1 1 auto"></div>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-icon-button
+        color="accent"
+        matTooltip="Load example"
+        (click)="loadExample()">
+        <fa-icon icon="info"></fa-icon>
+      </button>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Save the current playbook"
+        (click)="openDialog()">
+        <fa-icon icon="save"></fa-icon>
+      </button>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Reset current playbook"
+        (click)="resetCurrentPlaybook()">
+        <fa-icon icon="sync"></fa-icon>
+      </button>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="warn"
+        matTooltip="Clear editor"
+        (click)="clearEditor()"
+      >
+        <fa-icon icon="trash"></fa-icon>
+      </button>
+    </div>
+
+    <ngx-monaco-editor
+      [options]="editorOptions"
+      [(ngModel)]="code"
+      class="editor"
+    ></ngx-monaco-editor>
+
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,19 @@
+mat-expansion-panel {
+  background-color: #9eb0ff10;
+  border: 1px solid #00000005;
+  margin-bottom: 0.5em;
+}
+
+
+mat-expansion-panel-header {
+  padding: 0.5em;
+  font-weight: bold;
+}
+
+.expansion-content {
+  margin: 1em 0;
+}
+
+button {
+  font-weight: bold;
+}

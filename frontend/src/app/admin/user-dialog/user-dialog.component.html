@@ -1,0 +1,52 @@
+<h3 *ngIf="data.title" mat-dialog-title>{{ data.title }}</h3>
+
+<mat-dialog-content>
+  <form [formGroup]="userForm" fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field fxFlex="33">
+        <mat-label for="type">Type</mat-label>
+        <mat-select id="type" formControlName="type" required>
+          <mat-option *ngFor="let type of types" [value]="type">{{ type | uppercase }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="33">
+        <mat-label for="username">Username</mat-label>
+        <input matInput id="username" type="text" formControlName="username" required>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="33">
+        <mat-label for="password">Password</mat-label>
+        <input matInput id="password" type="password" formControlName="password" required>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field fxFlex="100">
+      <mat-label for="email">Email</mat-label>
+      <input matInput id="email" type="email" formControlName="email" required>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="100" *ngIf="item.public_id">
+      <mat-label for="public_id">Public ID</mat-label>
+      <input matInput id="public_id" type="text" formControlName="public_id" readonly>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field fxFlex="50">
+        <mat-label for="first_name">First name</mat-label>
+        <input matInput id="first_name" type="text" formControlName="first_name" required>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50">
+        <mat-label for="last_name">Last name</mat-label>
+        <input matInput id="last_name" type="text" formControlName="last_name" required>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions fxFlexAlign="space-between center">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <div fxFlex="1 1 auto"></div>
+  <button mat-raised-button color="accent" [disabled]="userForm.invalid" [mat-dialog-close]="userForm.value">{{ data.buttonLabel || 'Submit' }}</button>
+</mat-dialog-actions>

@@ -1,0 +1,6 @@
+.git
+.gitignore
+.cache
+.pytest_cache
+.vscode
+__pycache__

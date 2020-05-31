@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-title>
+    <h3>Users</h3>
+  </mat-card-title>
+  <mat-card-content>
+    <div class="addButton" fxLayoutGap="1em">
+      <div fxFlex="1 1 auto"></div>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Create new user"
+        (click)="openDialog()">
+        <fa-icon icon="plus"></fa-icon>
+      </button>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Refresh data"
+        (click)="fetchData()">
+        <fa-icon icon="sync"></fa-icon>
+      </button>
+    </div>
+
+    <app-ipmtable
+      *ngIf="data"
+      [displayedColumns]="displayedColumns"
+      [actions]="['E', 'R']"
+      (editCallback)="openDialog($event)"
+      (removeCallback)="removeUser($event)"
+      [data]="data"
+    >
+    </app-ipmtable>
+  </mat-card-content>
+</mat-card>

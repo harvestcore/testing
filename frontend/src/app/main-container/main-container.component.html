@@ -1,0 +1,71 @@
+<div fxLayout="row" fxFlexAlign="space-between" fxLayoutGap="2em">
+  <mat-card fxFlex="33" *ngIf="docker || dockerDisabled || dockerMalfunctioning">
+    <mat-card-header>
+      <mat-card-title fxLayout="row" fxLayoutGap="0.5em">
+        <div>
+          <fa-icon [style]="dockerIconStyle" icon="circle"></fa-icon>
+        </div>
+        <span>Docker service</span>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list *ngIf="docker">
+        <mat-list-item>Images: {{ docker.info.Images }}</mat-list-item>
+        <mat-list-item>Volumes: {{ docker.data_usage.Volumes.length }}</mat-list-item>
+        <mat-list-item>Containers: {{ docker.info.Containers }}</mat-list-item>
+        <mat-list-item>Containers running: {{ docker.info.ContainersRunning }}</mat-list-item>
+        <mat-list-item>Containers paused: {{ docker.info.ContainersPaused }}</mat-list-item>
+        <mat-list-item>Containers stopped: {{ docker.info.ContainersStopped }}</mat-list-item>
+      </mat-list>
+
+      <mat-list *ngIf="dockerMalfunctioning">
+        <mat-list-item>The service is malfunctioning and it might not work correctly. Please check your settings or the server logs.</mat-list-item>
+      </mat-list>
+
+      <mat-list *ngIf="dockerDisabled">
+        <mat-list-item>The service is disabled. To enable it please change your server settings.</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card fxFlex="33" *ngIf="server">
+    <mat-card-header>
+      <mat-card-title fxLayout="row" fxLayoutGap="0.5em">
+        <div>
+          <fa-icon [style]="serverIconStyle" icon="circle"></fa-icon>
+        </div>
+        <span>Server</span>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>Name: {{ server.name }}</mat-list-item>
+        <mat-list-item>System time: {{ server.time | date:'medium' }}</mat-list-item>
+        <mat-list-item>OS: {{ server.os }}</mat-list-item>
+        <mat-list-item>CPU Cores: {{ server.cores }}</mat-list-item>
+        <mat-list-item>Memory: {{ server.memory }}GB</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card fxFlex="33" *ngIf="mongo">
+    <mat-card-header>
+      <mat-card-title fxLayout="row" fxLayoutGap="0.5em">
+        <div>
+          <fa-icon [style]="mongoIconStyle" icon="circle"></fa-icon>
+        </div>
+        <span>Mongo service</span>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>Customers: {{ mongo.customers }}</mat-list-item>
+        <mat-list-item>Users in current customer: {{ mongo.users }}</mat-list-item>
+        <mat-list-item>Databases: {{ mongo.databases.length }}</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

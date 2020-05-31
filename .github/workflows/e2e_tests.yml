@@ -1,0 +1,45 @@
+name: E2E tests
+
+on:
+  push:
+    paths:
+      - '.github/**'
+      - 'frontend/**'
+      - 'backend/**'
+    pull_request:
+      branches:
+        - master
+        - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./
+      MONGO_HOSTNAME: 172.20.0.2
+      BASE_DATABASE: ipm_root
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v1
+    
+    - run: ls -l
+
+    - name: Install Cypress
+      run: npm install --save-dev cypress
+
+    - name: Install deps
+      run: pip3 install setuptools && pip3 install -r backend/requirements.txt
+
+    - name: Build images
+      run: docker-compose build
+
+    - name: Run images
+      run: docker-compose up -d
+
+    - name: Initialize db
+      run: python3 init_database.py
+      working-directory: ./backend
+
+    - name: Run e2e tests
+      run: ./node_modules/cypress/bin/cypress run

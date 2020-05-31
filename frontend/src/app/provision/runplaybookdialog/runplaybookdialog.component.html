@@ -1,0 +1,20 @@
+<h3 *ngIf="data.title" mat-dialog-title>{{ data.title }}</h3>
+
+<mat-dialog-content>
+  <mat-progress-bar *ngIf="running" mode="indeterminate" color="accent"></mat-progress-bar>
+  <textarea
+    matInput
+    readonly
+    [value]="text"
+    cdkTextareaAutosize
+    #autosize="cdkTextareaAutosize"
+    cdkAutosizeMinRows="3"
+    cdkAutosizeMaxRows="25">
+  ></textarea>
+</mat-dialog-content>
+
+<mat-dialog-actions fxFlexAlign="space-between center">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <div fxFlex="1 1 auto"></div>
+  <button mat-raised-button color="accent" mat-dialog-close>{{ data.buttonLabel || 'Submit' }}</button>
+</mat-dialog-actions>

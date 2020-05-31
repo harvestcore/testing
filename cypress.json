@@ -1,0 +1,13 @@
+{
+  "chromeWebSecurity": false,
+  "video": false,
+  "testFiles": [
+    "login.spec.js",
+    "logout.spec.js",
+    "admin.spec.js",
+    "machines.spec.js",
+    "provision.spec.js",
+    "window.spec.js",
+    "status.spec.js"
+  ]
+}

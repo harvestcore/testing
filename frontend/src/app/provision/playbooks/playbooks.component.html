@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-content>
+    <div class="addButton" fxLayoutGap="1em">
+      <div fxFlex="1 1 auto"></div>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Create new playbook"
+        (click)="goToEditor()">
+        <fa-icon icon="plus"></fa-icon>
+      </button>
+      <button
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-raised-button
+        color="accent"
+        matTooltip="Refresh data"
+        (click)="fetchData()">
+        <fa-icon icon="sync"></fa-icon>
+      </button>
+    </div>
+
+    <app-ipmtable
+      *ngIf="data"
+      [displayedColumns]="displayedColumns"
+      [actions]="['P', 'E', 'R']"
+      (playCallback)="runPlaybook($event)"
+      (editCallback)="editPlaybook($event)"
+      (removeCallback)="removePlaybook($event)"
+      [data]="data"
+    >
+    </app-ipmtable>
+  </mat-card-content>
+</mat-card>

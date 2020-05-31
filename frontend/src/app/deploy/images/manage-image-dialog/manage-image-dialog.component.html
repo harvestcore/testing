@@ -1,0 +1,47 @@
+<h3 *ngIf="data.title" mat-dialog-title>{{ data.title }}</h3>
+
+<mat-dialog-content>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Common operations</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-progress-bar class="expansion-content" *ngIf="runningOperation" mode="indeterminate" color="accent"></mat-progress-bar>
+      <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1em" class="expansion-content">
+        <button
+          [disabled]="runningOperation"
+          fxLayout="column"
+          fxLayoutAlign="center"
+          mat-raised-button
+          color="primary"
+          (click)="reload()">
+          <span>Reload</span>
+        </button>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>History</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div fxLayout="column" fxLayoutGap="1em" class="expansion-content">
+        <mat-progress-bar *ngIf="fetchingHistory" mode="indeterminate" color="accent"></mat-progress-bar>
+        <textarea
+          matInput
+          readonly
+          [value]="historyText"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="25">
+        ></textarea>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-dialog-content>
+
+<mat-dialog-actions fxFlexAlign="space-between center">
+  <div fxFlex="1 1 auto"></div>
+  <button mat-raised-button mat-dialog-close [disabled]="runningOperation" color="accent">{{ data.buttonLabel || 'Close' }}</button>
+</mat-dialog-actions>

@@ -1,0 +1,80 @@
+<h3 *ngIf="data.title" mat-dialog-title>{{ data.title }}</h3>
+
+<mat-dialog-content>
+  <form [formGroup]="machineForm" fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field fxFlex="80">
+        <mat-label for="name">Name</mat-label>
+        <input matInput id="name" type="text" formControlName="name" required>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="20">
+        <mat-label for="type">Type</mat-label>
+        <mat-select id="type" formControlName="type" required>
+          <mat-option *ngFor="let type of types" [value]="type">{{ type | uppercase }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field fxFlex="100">
+      <mat-label for="description">Description</mat-label>
+      <textarea
+        matInput
+        id="description"
+        formControlName="description"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="2"
+        cdkAutosizeMaxRows="5">
+      ></textarea>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field fxFlex="25">
+        <mat-label for="ipv4">IPv4</mat-label>
+        <input matInput id="ipv4" type="text" formControlName="ipv4">
+      </mat-form-field>
+
+      <mat-form-field fxFlex="45">
+        <mat-label for="ipv6">IPv6</mat-label>
+        <input matInput id="ipv6" type="text" formControlName="ipv6">
+      </mat-form-field>
+
+      <mat-form-field fxFlex="30">
+        <mat-label for="mac">MAC</mat-label>
+        <input matInput id="mac" type="text" formControlName="mac">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field fxFlex="50">
+        <mat-label for="gateway">Gateway</mat-label>
+        <input matInput id="gateway" type="text" formControlName="gateway">
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50">
+        <mat-label for="broadcast">Broadcast</mat-label>
+        <input matInput id="broadcast" type="text" formControlName="broadcast">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field fxFlex="50">
+        <mat-label for="network">Network</mat-label>
+        <input matInput id="network" type="text" formControlName="network">
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50">
+        <mat-label for="netmask">Netmask</mat-label>
+        <input matInput id="netmask" type="text" formControlName="netmask">
+      </mat-form-field>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions fxFlexAlign="space-between center">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <div fxFlex="1 1 auto"></div>
+  <button mat-raised-button color="accent" [disabled]="machineForm.invalid" [mat-dialog-close]="machineForm.value">{{ data.buttonLabel || 'Submit' }}</button>
+</mat-dialog-actions>

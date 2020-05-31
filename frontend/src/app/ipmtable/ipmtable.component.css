@@ -1,0 +1,9 @@
+table, mat-paginator{
+  width: 100%;
+  background-color: #00000000;
+}
+
+mat-form-field {
+  font-size: 13px;
+}
+

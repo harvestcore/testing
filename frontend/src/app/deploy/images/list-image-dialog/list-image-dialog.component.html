@@ -1,0 +1,44 @@
+<h3 *ngIf="data.title" mat-dialog-title>{{ data.title }}</h3>
+
+<mat-dialog-content>
+  <form [formGroup]="listForm" fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field fxFlex="95">
+        <mat-label for="searchTerm">Search term</mat-label>
+        <input matInput id="searchTerm" type="text" formControlName="searchTerm" required>
+      </mat-form-field>
+
+      <button
+        fxFlex="5"
+        [disabled]="listForm.invalid"
+        fxLayout="column"
+        fxLayoutAlign="center"
+        mat-icon-button
+        color="primary"
+        (click)="search()">
+        <fa-icon icon="search"></fa-icon>
+      </button>
+    </div>
+  </form>
+
+  <mat-divider></mat-divider>
+
+  <mat-progress-bar class="expansion-content" *ngIf="pullingImage" mode="indeterminate" color="accent"></mat-progress-bar>
+
+  <div class="table">
+    <app-ipmtable
+      *ngIf="results && !pullingImage"
+      [data]="results"
+      [displayedColumns]="displayedColumns"
+      [deselectedColumns]="['description']"
+      [actions]="['C']"
+      (customActionCallback)="pull($event)"
+      [customActionData]="manageContainerCustomActionData"
+    ></app-ipmtable>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions fxFlexAlign="space-between center">
+  <div fxFlex="1 1 auto"></div>
+  <button mat-raised-button color="accent" [disabled]="pullingImage" mat-dialog-close>{{ data.buttonLabel || 'Close' }}</button>
+</mat-dialog-actions>
