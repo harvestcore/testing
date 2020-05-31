@@ -7,25 +7,25 @@ context('Status', () => {
 
   it('Go home', () => {
     cy.getCookie('ipm-token').should('be.not.equal', null);
-    cy.visit('http://localhost:4200');
+    cy.visit('http://localhost:4200/');
     cy.wait(500);
   });
 
   it('check that docker card exists', () => {
     cy.wait(150);
-    cy.get('span').contains('Docker service').should('exist');
+    cy.get('body').contains('Docker').should('exist');
   });
 
   it('check that mongo card exists', () => {
     cy.wait(150);
-    cy.get('span').contains('Mongo service').should('exist');
+    cy.get('body').contains('Mongo').should('exist');
   });
 
   it('check that mongo card has its fields', () => {
     cy.wait(150);
-    cy.get('mat-list-item').contains('Customers').should('exist');
-    cy.get('mat-list-item').contains('Users in current customer').should('exist');
-    cy.get('mat-list-item').contains('Databases').should('exist');
+    cy.get('body').contains('Customers').should('exist');
+    cy.get('body').contains('Users in current customer').should('exist');
+    cy.get('body').contains('Databases').should('exist');
   });
 
   it('check that the user button exists', () => {
