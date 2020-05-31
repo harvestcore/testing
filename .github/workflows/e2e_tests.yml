@@ -2,14 +2,8 @@ name: E2E tests
 
 on:
   push:
-    paths:
-      - '.github/**'
-      - 'frontend/**'
-      - 'backend/**'
-    pull_request:
-      branches:
-        - master
-        - develop
+    branches:
+      - master
 
 jobs:
   build:
